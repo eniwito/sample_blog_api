@@ -9,7 +9,7 @@ RSpec.describe PostCreator do
     let(:new_user_params) { { login: 'new_login', ip: Faker::Internet.ip_v4_address } }
     let(:new_post_params) { { title: valid_post.title, body: valid_post.body } }
     context 'with valid params' do
-      let(:valid_post) { posts(:valid) }
+      let(:valid_post) { posts(:valid_first) }
       let(:existing_user_params) { { login: valid_user.login, ip: valid_ip.ip } }
 
       context 'should save post with save new user and save new ip' do

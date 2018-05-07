@@ -5,7 +5,7 @@ RSpec.describe PostRatingIncreaser do
 
   describe '#save' do
     context 'with valid params' do
-      let(:valid_post) { posts(:valid) }
+      let(:valid_post) { posts(:valid_first) }
       let(:valid_post_rating_params) { { rating: '5' } }
 
       context 'should save post rating' do
@@ -16,7 +16,7 @@ RSpec.describe PostRatingIncreaser do
     end
 
     context 'with invalid params' do
-      let(:valid_post) { posts(:valid) }
+      let(:valid_post) { posts(:valid_first) }
       let(:invalid_post_rating_params) { { rating: '6' } }
 
       context 'should not save post rating' do

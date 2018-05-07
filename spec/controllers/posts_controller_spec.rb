@@ -9,7 +9,7 @@ RSpec.describe PostsController, type: :controller do
     let(:new_user_params) { { login: 'new_login', ip: Faker::Internet.ip_v4_address } }
 
     context 'with valid params' do
-      let(:valid_post) { posts(:valid) }
+      let(:valid_post) { posts(:valid_first) }
       let(:existing_user_params) { { login: valid_user.login, ip: valid_ip.ip } }
       let(:new_post_params) { { title: valid_post.title, body: valid_post.body } }
 
@@ -72,7 +72,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'POST #vote' do
-    let(:valid_post) { posts(:valid) }
+    let(:valid_post) { posts(:valid_first) }
     context 'with valid params' do
       let(:valid_post_rating_params) { { rating: '5' } }
       subject { lambda { post :vote, params: { post: valid_post_rating_params, id: valid_post.id } } }
@@ -123,7 +123,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'GET #top' do
-    let(:valid_post) { posts(:valid) }
+    let(:valid_post) { posts(:valid_first) }
 
     context 'with valid params' do
       before(:each) { get :top, params: { count: 10 } }
@@ -134,13 +134,15 @@ RSpec.describe PostsController, type: :controller do
 
       it 'should return valid posts array' do
         json_response = JSON.parse(response.body)
-        expect(json_response['posts'][0]).to be
+        expect(json_response['posts'][0]['avg_rating']).to be > json_response['posts'][1]['avg_rating']
       end
     end
   end
 
   describe 'GET #ip_list' do
     context 'with valid params' do
+      let(:valid_ip) { ips(:valid) }
+      let(:valid_user) { users(:valid) }
       before(:each) { get :ip_list }
 
       it 'should return valid status' do
@@ -149,8 +151,8 @@ RSpec.describe PostsController, type: :controller do
 
       it 'should return valid ip list array' do
         json_response = JSON.parse(response.body)
-        expect(json_response[0]['ip']).to be
-        expect(json_response[0]['logins'][0]).to be
+        expect(json_response[0]['ip']).to eq valid_ip.ip.to_s
+        expect(json_response[0]['logins'][0]).to eq valid_user.login
       end
     end
   end

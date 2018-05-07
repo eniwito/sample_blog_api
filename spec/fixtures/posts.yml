@@ -1,6 +1,14 @@
-valid:
+valid_first:
   title: "Test title"
   body: "Test body"
+  avg_rating: 0.0
+  user_id: 1
+  ip_id: 1
+
+valid_second:
+  title: "Second test title"
+  body: "Second test body"
+  avg_rating: 5.0
   user_id: 1
   ip_id: 1
 
