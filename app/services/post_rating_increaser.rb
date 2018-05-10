@@ -35,9 +35,11 @@ class PostRatingIncreaser
 
     def recalculate_avg_rating
       @post = Post.find(@post_id)
-      @post.ratings_count += 1
-      @post.avg_rating = @post.post_ratings.sum(:rating).to_f / @post.ratings_count
-      @post.save
+      @post.with_lock do
+        @post.ratings_count += 1
+        @post.avg_rating = @post.post_ratings.reload.sum(:rating).to_f / @post.ratings_count
+        @post.save!
+      end
     end
 
 end
