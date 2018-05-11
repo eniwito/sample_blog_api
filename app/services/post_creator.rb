@@ -16,8 +16,7 @@ class PostCreator
   def save
     return if invalid?
     user = User.find_or_create_by(login: @login)
-    ip = Ip.find_or_create_by(ip: @ip)
-    ip.users << user unless ip.users.include?(user)
+    ip = Ip.find_or_create_by(ip: @ip, login: @login)
     @post = Post.create(title: @title, body: @body, user: user, ip: ip)
   end
 end

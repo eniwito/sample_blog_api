@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  fixtures :posts, :users, :ips, :ips_users
+  fixtures :posts, :users, :ips
 
   describe 'POST #create' do
     let(:valid_user) { users(:valid) }

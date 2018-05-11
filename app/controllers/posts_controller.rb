@@ -26,9 +26,9 @@ class PostsController < ApplicationController
   end
 
   def ip_list
-    list = User.ip_list
+    list = Ip.more_than_one_login
 
-    render json: list, status: :ok
+    render json: list, each_serializer: IpListSerializer, status: :ok
   end
 
   private

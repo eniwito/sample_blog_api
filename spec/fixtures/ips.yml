@@ -1,3 +1,9 @@
 valid:
+  id: 1
   ip: "127.0.0.1"
-  users: first
+  login: "foo"
+
+valid_second:
+  id: 2
+  ip: "127.0.0.1"
+  login: "bar"

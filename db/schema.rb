@@ -17,15 +17,9 @@ ActiveRecord::Schema.define(version: 2018_05_07_210013) do
 
   create_table "ips", force: :cascade do |t|
     t.inet "ip"
+    t.string "login"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "ips_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "ip_id", null: false
-    t.index ["ip_id", "user_id"], name: "index_ips_users_on_ip_id_and_user_id"
-    t.index ["user_id", "ip_id"], name: "index_ips_users_on_user_id_and_ip_id"
   end
 
   create_table "post_ratings", force: :cascade do |t|
